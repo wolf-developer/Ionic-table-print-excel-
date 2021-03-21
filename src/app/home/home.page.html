@@ -1,0 +1,96 @@
+<!--
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <table class="table">
+      <caption>List of users</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Data Table</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding">
+    <div id="button-group" class="section text-right">
+      <button type="button" class="btn btn-secondary" (click)="printTable()">Print Current Table</button>
+      <button type="button" class="btn btn-danger">Export to Excel</button>
+    </div>
+
+    <!-- Theme classes dark, material, bootstrap -->
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let col of columns">{{col.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows">
+            <td>{{row.name}}</td>
+            <td>{{row.company}}</td>
+            <td>{{row.genre}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <ngx-datatable
+      class="material"
+      [limit]="8"
+      [rows]="rows"
+      [rowHeight]="50"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [sortType]="'multi'"
+      [headerHeight]="50"
+      [footerHeight]="50">
+    </ngx-datatable> -->
+
+  </div>
+</ion-content>
