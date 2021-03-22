@@ -61,7 +61,9 @@ export class HomePage {
     document.body.appendChild(iframe);
     iframe.contentDocument.head.innerHTML = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
     iframe.contentDocument.body.innerHTML = '<div class="container">'+document.getElementById("container").innerHTML + '</div>';
-    iframe.contentWindow.print();
+    setTimeout(() => {
+      iframe.contentWindow.print();
+    }, 1000);
     document.getElementById('pagenation').hidden = false;
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
       el.style.visibility = 'inherit';
