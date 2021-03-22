@@ -62,12 +62,17 @@ export class HomePage {
     document.getElementById('title').hidden = false;
     document.getElementById('button-group').hidden = false;
     // document.getElementsByClassName('hide_colume')[0].hidden = false;
-    [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
-      el.style.visibility = 'show';
-    });
+  
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
-      el.style.visibility = 'show';
+      el.style.visibility = 'inherit';
+    });
+    [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
+      el.style.visibility = 'inherit';
     });
     
+    
+  }
+  excelTable(){
+    document.getElementById('title').hidden = true;
   }
 }
