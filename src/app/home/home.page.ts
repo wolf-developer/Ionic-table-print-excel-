@@ -29,6 +29,7 @@ export interface Data {
 export class HomePage {
   public items: any;
   public pageOfItems: any;
+  temp: any;
   public data: Data;
   public columns: any;
   // public rows: any;
@@ -79,10 +80,22 @@ export class HomePage {
 
   }
   exportToExcel(event) {
-    this.excelService.exportAsExcelFile(this.pageOfItems, `excel_${this.page}`);
+    this.temp = this.pageOfItems.map((a: any) => {
+      return Object.assign({}, { name: a.name, company: a.company });
+    })
+
+    this.excelService.exportAsExcelFile(this.temp, `excel_${this.page}`);
   }
 
   onChangePage(pageOfItems: any) {
+    console.log("pageOfItems=", pageOfItems);
     this.pageOfItems = pageOfItems;
-}
+  }
+
+  changePage(event) {
+     const value =event.target.value;
+     this.rowsPerPage=value;
+    
+    console.log("dsfsf", value);
+  }
 }

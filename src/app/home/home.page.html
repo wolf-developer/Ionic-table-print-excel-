@@ -28,8 +28,13 @@
           </tr>
         </tbody>
       </table>
-      <div class="card-footer pb-0 pt-3">
-        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+      <div class="card-footer pb-0 pt-3" id="pagenation">
+        <jw-pagination pageSize="5" maxPages="3" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+        <select id="page_count" (change)="changePage($event)">
+          <option value="10" >10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
       </div>
     </div>
 
