@@ -24,7 +24,7 @@ export class HomePage {
   // public rows: any;
   page: number = 1;
   rowsPerPage: number = 5;
-  maxPages: number = 10;
+  maxPages: number = 30;
   pager: any = {};
 
   isPrint = false
@@ -87,8 +87,7 @@ export class HomePage {
 
   changePage(event) {
     const value = event.target.value;
-    this.rowsPerPage = value;
-
+    this.rowsPerPage = Number(value);
     this.setPage(1);
   }
 
