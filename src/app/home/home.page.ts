@@ -1,19 +1,8 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: 'home.page.html',
-//   styleUrls: ['home.page.scss'],
-// })
-// export class HomePage {
-
-//   constructor() {}
-
-// }
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ViewEncapsulation } from '@angular/core';
 import { ExcelService } from '../excel.service';
+var paginate = require('jw-paginate/lib/jw-paginate');
 
 export interface Data {
   movies: string;
@@ -34,7 +23,9 @@ export class HomePage {
   public columns: any;
   // public rows: any;
   page: number = 1;
-  rowsPerPage: number = 10;
+  rowsPerPage: number = 5;
+  maxPages: number = 10;
+  pager: any = {};
 
   isPrint = false
 
@@ -53,6 +44,8 @@ export class HomePage {
         console.log(res)
         this.excelService = excelService;
         this.items = res.movies;
+
+        this.setPage(1);
       });
   }
 
@@ -83,19 +76,24 @@ export class HomePage {
     this.temp = this.pageOfItems.map((a: any) => {
       return Object.assign({}, { name: a.name, company: a.company });
     })
-
-    this.excelService.exportAsExcelFile(this.temp, `excel_${this.page}`);
+    var element=document.querySelector(".active > a");
+    this.excelService.exportAsExcelFile(this.temp, `excel_`+element.textContent);
   }
 
   onChangePage(pageOfItems: any) {
-    console.log("pageOfItems=", pageOfItems);
+    this.pager = paginate(this.items.length, this.page, this.rowsPerPage, this.maxPages);
     this.pageOfItems = pageOfItems;
   }
 
   changePage(event) {
-     const value =event.target.value;
-     this.rowsPerPage=value;
-    
-    console.log("dsfsf", value);
+    const value = event.target.value;
+    this.rowsPerPage = value;
+
+    this.setPage(1);
+  }
+
+  setPage(page: number) {
+    this.pager = paginate(this.items.length, page, this.rowsPerPage, this.maxPages);
+    this.pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 }

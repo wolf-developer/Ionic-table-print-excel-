@@ -29,8 +29,26 @@
         </tbody>
       </table>
       <div class="card-footer pb-0 pt-3" id="pagenation">
-        <jw-pagination pageSize="5" maxPages="3" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+        <!-- <jw-pagination [items]="items"  (changePage)="onChangePage($event)"></jw-pagination> -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+              <a (click)="setPage(1)" class="page-link">First</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+              <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+              <a (click)="setPage(page)" class="page-link">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+              <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+              <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+          </li>
+      </ul>
         <select id="page_count" (change)="changePage($event)">
+          <option value="5" >5</option>
           <option value="10" >10</option>
           <option value="20">20</option>
           <option value="30">30</option>
