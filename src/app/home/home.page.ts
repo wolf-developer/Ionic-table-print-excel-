@@ -38,7 +38,7 @@ export class HomePage {
     this.columns = [
       { name: 'Name' },
       { name: 'Company' },
-      { name: 'Genre' }
+      { name: 'No_Print' }
     ];
 
     this.http.get<Data>('../../assets/movies.json')
@@ -49,8 +49,25 @@ export class HomePage {
   }
 
   printTable() {
+    document.getElementById('title').hidden = true;
     document.getElementById('button-group').hidden = true;
+    // document.getElementsByClassName('hide_colume').style.visibility='hidden';
+    [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
+      el.style.visibility = 'hidden';
+    });
+    [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
+      el.style.visibility = 'hidden';
+    });
     window.print();
+    document.getElementById('title').hidden = false;
     document.getElementById('button-group').hidden = false;
+    // document.getElementsByClassName('hide_colume')[0].hidden = false;
+    [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
+      el.style.visibility = 'show';
+    });
+    [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
+      el.style.visibility = 'show';
+    });
+    
   }
 }
