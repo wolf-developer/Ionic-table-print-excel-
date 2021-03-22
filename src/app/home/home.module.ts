@@ -28,6 +28,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule
   ],
   declarations: [
-    HomePage
+    HomePage,
+    JwPaginationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

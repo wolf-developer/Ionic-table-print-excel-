@@ -13,6 +13,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ViewEncapsulation } from '@angular/core';
+import { ExcelService } from '../excel.service';
 
 export interface Data {
   movies: string;
@@ -26,14 +27,19 @@ export interface Data {
 })
 
 export class HomePage {
+  public items: any;
+  public pageOfItems: any;
   public data: Data;
   public columns: any;
-  public rows: any;
+  // public rows: any;
+  page: number = 1;
+  rowsPerPage: number = 10;
 
   isPrint = false
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private excelService: ExcelService
   ) {
     this.columns = [
       { name: 'Name' },
@@ -44,14 +50,15 @@ export class HomePage {
     this.http.get<Data>('../../assets/movies.json')
       .subscribe((res) => {
         console.log(res)
-        this.rows = res.movies;
+        this.excelService = excelService;
+        this.items = res.movies;
       });
   }
 
   printTable() {
     document.getElementById('title').hidden = true;
     document.getElementById('button-group').hidden = true;
-    // document.getElementsByClassName('hide_colume').style.visibility='hidden';
+    document.getElementById('pagenation').hidden = true;
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
       el.style.visibility = 'hidden';
     });
@@ -61,18 +68,21 @@ export class HomePage {
     window.print();
     document.getElementById('title').hidden = false;
     document.getElementById('button-group').hidden = false;
-    // document.getElementsByClassName('hide_colume')[0].hidden = false;
-  
+    document.getElementById('pagenation').hidden = false;
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
       el.style.visibility = 'inherit';
     });
     [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
       el.style.visibility = 'inherit';
     });
-    
-    
+
+
   }
-  excelTable(){
-    document.getElementById('title').hidden = true;
+  exportToExcel(event) {
+    this.excelService.exportAsExcelFile(this.pageOfItems, `excel_${this.page}`);
   }
+
+  onChangePage(pageOfItems: any) {
+    this.pageOfItems = pageOfItems;
+}
 }
