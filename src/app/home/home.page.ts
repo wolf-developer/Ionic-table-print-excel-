@@ -50,8 +50,6 @@ export class HomePage {
   }
 
   printTable() {
-    document.getElementById('title').hidden = true;
-    document.getElementById('button-group').hidden = true;
     document.getElementById('pagenation').hidden = true;
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
       el.style.visibility = 'hidden';
@@ -59,9 +57,11 @@ export class HomePage {
     [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
       el.style.visibility = 'hidden';
     });
-    window.print();
-    document.getElementById('title').hidden = false;
-    document.getElementById('button-group').hidden = false;
+    let iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    iframe.contentDocument.head.innerHTML = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+    iframe.contentDocument.body.innerHTML = '<div class="container">'+document.getElementById("container").innerHTML + '</div>';
+    iframe.contentWindow.print();
     document.getElementById('pagenation').hidden = false;
     [].forEach.call(document.querySelectorAll('.hide_colume'), function (el) {
       el.style.visibility = 'inherit';
@@ -69,8 +69,6 @@ export class HomePage {
     [].forEach.call(document.querySelectorAll('.No_Print'), function (el) {
       el.style.visibility = 'inherit';
     });
-
-
   }
   exportToExcel(event) {
     this.temp = this.pageOfItems.map((a: any) => {

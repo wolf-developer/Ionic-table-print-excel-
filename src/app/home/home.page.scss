@@ -26,9 +26,9 @@
 //   text-decoration: none;
 // }
 
-@import '~@swimlane/ngx-datatable/index.css';
-@import '~@swimlane/ngx-datatable/themes/material.scss';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
+// @import '~@swimlane/ngx-datatable/index.css';
+// @import '~@swimlane/ngx-datatable/themes/material.scss';
+// @import '~@swimlane/ngx-datatable/assets/icons.css';
 
 button{
     margin-left: 10px;
@@ -42,4 +42,9 @@ button{
     height: 38px;
     border-radius: 6px;
 }
- 
+body{
+    position: relative;
+    overflow: auto;
+}
+
+
