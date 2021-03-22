@@ -24,7 +24,7 @@ export class HomePage {
   // public rows: any;
   page: number = 1;
   rowsPerPage: number = 5;
-  maxPages: number = 30;
+  maxPages: number = 5;
   pager: any = {};
 
   isPrint = false
